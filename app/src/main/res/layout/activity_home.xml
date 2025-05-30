@@ -50,7 +50,7 @@
                 android:layout_gravity="center_horizontal"
 
                 android:text="OUR SERVICE"
-                android:textColor="#FFFF00"
+                android:textColor="#FAFF00"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -238,7 +238,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_gravity="center_horizontal"
                 android:text="About Us"
-                android:textColor="#FFFF00"
+                android:textColor="#FAFF00"
                 android:textStyle="bold"
                 android:textSize="16sp" />
 
@@ -263,7 +263,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="Location"
-                android:textColor="#FFFF00"
+                android:textColor="#FAFF00"
                 android:textStyle="bold"
                 android:textSize="16sp" />
 
@@ -279,7 +279,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="12dp"
-                android:background="#FFFF00">
+                android:background="#FAFF00">
 
                 <TextView
                     android:layout_width="wrap_content"
