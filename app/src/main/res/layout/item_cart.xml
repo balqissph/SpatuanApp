@@ -1,0 +1,55 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="@drawable/white_rounded"
+    android:layout_marginBottom="16dp">
+
+    <ImageView
+        android:id="@+id/item_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fast_clean"
+        android:background="@drawable/rounded_image"
+        android:clipToOutline="true" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingHorizontal="12dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fast Clean"
+            android:textStyle="bold"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/item_qty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Qty: 3"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price: Rp. 90.000"
+            android:textColor="#000000" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/delete_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_delete"
+        android:layout_gravity="center_vertical" />
+</LinearLayout>

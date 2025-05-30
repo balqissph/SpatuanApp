@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#353434">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:padding="16dp"
+        android:paddingBottom="100dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNav">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvSpatuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SPATUAN"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.4"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Solusi Terbaik untuk Sepatu Bersih, Segar, dan Terawat !"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_gravity="center_horizontal"
+
+                android:text="OUR SERVICE"
+                android:textColor="#FFFF00"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="150dp"
+                android:layout_height="2dp"
+                android:layout_marginBottom="12dp"
+                android:background="#FFFFFF"
+                android:layout_gravity="center_horizontal"/>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:useDefaultMargins="true">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginBottom="16dp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="239dp"
+                        android:layout_marginBottom="-24dp"
+                        android:background="@drawable/yellow_rounded"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/deepCleanImage"
+                            android:layout_width="150dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/rounded_image"
+                            android:clipToOutline="true"
+                            android:outlineProvider="background"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/deep_clean" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/black_rounded"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="10dp"
+                        android:gravity="center"
+                        android:text="Deep Clean"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginBottom="16dp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="239dp"
+                        android:layout_marginBottom="-24dp"
+                        android:background="@drawable/yellow_rounded"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/whiteShoesImage"
+                            android:layout_width="150dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/rounded_image"
+                            android:clipToOutline="true"
+                            android:outlineProvider="background"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/white_shoes" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/black_rounded"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="10dp"
+                        android:gravity="center"
+                        android:text="White Shoes Treatment"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginBottom="16dp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="239dp"
+                        android:layout_marginBottom="-24dp"
+                        android:background="@drawable/yellow_rounded"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/fastCleanImage"
+                            android:layout_width="150dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/rounded_image"
+                            android:clipToOutline="true"
+                            android:outlineProvider="background"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/fast_clean" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/black_rounded"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="10dp"
+                        android:gravity="center"
+                        android:text="Fast Clean"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginBottom="16dp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="239dp"
+                        android:layout_marginBottom="-24dp"
+                        android:background="@drawable/yellow_rounded"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/unyellowingImage"
+                            android:layout_width="150dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/rounded_image"
+                            android:clipToOutline="true"
+                            android:outlineProvider="background"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/unyellowing" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/black_rounded"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="10dp"
+                        android:gravity="center"
+                        android:text="Unyellowing"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </GridLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_gravity="center_horizontal"
+                android:text="About Us"
+                android:textColor="#FFFF00"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="150dp"
+                android:layout_height="2dp"
+                android:layout_marginBottom="12dp"
+                android:background="#FFFFFF"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Spatuan adalah layanan cuci sepatu profesional yang menjaga kebersihan dan keindahan sepatu Anda. Kami merawat semua jenis sepatu dengan teknik aman dan hasil maksimal. Bersih, rapi, dan bikin percaya diri."
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginBottom="24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Location"
+                android:textColor="#FFFF00"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="150dp"
+                android:layout_height="2dp"
+                android:layout_marginBottom="12dp"
+                android:background="#FFFFFF"
+                android:layout_gravity="center_horizontal"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:background="#FFFF00">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_lokasi"
+                    android:text="Jl. Nori no 28/34 Kota Madiun"
+                    android:textSize="14sp"
+                    android:drawablePadding="8dp"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_phone"
+                    android:text="092817291881"
+                    android:textSize="14sp"
+                    android:drawablePadding="8dp"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="8dp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:src="@drawable/map_preview"
+                    android:scaleType="centerCrop" />
+            </LinearLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="69dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bottom_nav_bg"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="32dp"
+            android:weightSum="3">
+
+            <ImageView
+                android:id="@+id/home"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_home" />
+
+            <ImageView
+                android:id="@+id/keranjang"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_keranjang"
+                android:backgroundTint="#FFFF00" />
+
+            <ImageView
+                android:id="@+id/histori"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_histori" />
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
