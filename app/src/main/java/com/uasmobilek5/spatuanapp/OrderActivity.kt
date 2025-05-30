@@ -1,15 +1,12 @@
 package com.uasmobilek5.spatuanapp
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
 class OrderActivity : AppCompatActivity() {
@@ -27,13 +24,11 @@ class OrderActivity : AppCompatActivity() {
             0, 3,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-
         spannable.setSpan(
             ForegroundColorSpan(Color.WHITE),
             3, 7,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-
         tvSpatuan.text = spannable
 
         val etNama = findViewById<EditText>(R.id.etNama)
@@ -42,6 +37,11 @@ class OrderActivity : AppCompatActivity() {
         val checkboxShopee = findViewById<CheckBox>(R.id.checkbox_shopee)
         val checkboxCOD = findViewById<CheckBox>(R.id.checkbox_cod)
         val btnSubmit = findViewById<Button>(R.id.btnSubmit)
+
+        // Tambahkan ini untuk navigasi bawah
+        val homeIcon = findViewById<ImageView>(R.id.home)
+        val keranjangIcon = findViewById<ImageView>(R.id.keranjang)
+        val historiIcon = findViewById<ImageView>(R.id.histori)
 
         val paymentCheckboxes = listOf(checkboxDana, checkboxShopee, checkboxCOD)
 
@@ -84,7 +84,22 @@ class OrderActivity : AppCompatActivity() {
 
             val message = "Nama: $nama\nAlamat: $alamat\nMetode Pembayaran: $selectedPayment"
             Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+        }
 
+        // Navigasi bawah
+        homeIcon.setOnClickListener {
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
+        }
+
+        keranjangIcon.setOnClickListener {
+            startActivity(Intent(this, CartActivity::class.java))
+            finish()
+        }
+
+        historiIcon.setOnClickListener {
+            startActivity(Intent(this, HistoryActivity::class.java))
+            finish()
         }
     }
 }

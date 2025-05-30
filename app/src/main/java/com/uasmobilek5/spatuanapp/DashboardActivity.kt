@@ -1,4 +1,4 @@
-package com.cantikka.uas
+package com.uasmobilek5.spatuanapp
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

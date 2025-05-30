@@ -45,29 +45,24 @@ class CartActivity : AppCompatActivity() {
 
         tvSpatuan.text = spannable
 
-        // Inisialisasi View
         cartRecyclerView = findViewById(R.id.cartRecyclerView)
         checkoutButton = findViewById(R.id.checkoutButton)
         homeIcon = findViewById(R.id.home)
         keranjangIcon = findViewById(R.id.keranjang)
         historiIcon = findViewById(R.id.histori)
 
-        // Dummy data untuk cart
         val cartItems = listOf(
             CartItem(R.drawable.fast_clean, "Fast Clean", 1, 35000),
             CartItem(R.drawable.deep_clean, "Deep Clean", 2, 40000),
             CartItem(R.drawable.unyellowing, "Unyellowing", 1, 35000),
         )
 
-        // Setup RecyclerView
         val cartAdapter = CartAdapter(cartItems)
         cartRecyclerView.layoutManager = LinearLayoutManager(this)
         cartRecyclerView.adapter = cartAdapter
 
-        // Button Cekout
         checkoutButton.setOnClickListener {
-            // Arahkan ke halaman checkout atau tampilkan toast
-            // startActivity(Intent(this, CheckoutActivity::class.java))
+            startActivity(Intent(this, OrderActivity::class.java))
         }
 
         // Navigasi bawah
@@ -77,12 +72,11 @@ class CartActivity : AppCompatActivity() {
         }
 
         keranjangIcon.setOnClickListener {
-            // Sudah di CartActivity, tidak perlu pindah
         }
 
         historiIcon.setOnClickListener {
-//            startActivity(Intent(this, HistoryActivity::class.java))
-//            finish()
+            startActivity(Intent(this, HistoryActivity::class.java))
+            finish()
         }
     }
 }
