@@ -36,6 +36,7 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
+                android:id="@+id/TextDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -48,16 +49,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_gravity="center_horizontal"
-
                 android:text="OUR SERVICE"
                 android:textColor="#FAFF00"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <View
                 android:layout_width="150dp"
                 android:layout_height="2dp"
-                android:layout_marginBottom="12dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="15dp"
                 android:background="#FFFFFF"
                 android:layout_gravity="center_horizontal"/>
 
@@ -95,6 +96,7 @@
                     </FrameLayout>
 
                     <TextView
+                        android:id="@+id/deepCleanText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -136,6 +138,7 @@
                     </FrameLayout>
 
                     <TextView
+                        android:id="@+id/whiteShoesText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -177,6 +180,7 @@
                     </FrameLayout>
 
                     <TextView
+                        android:id="@+id/fastCleanText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -218,6 +222,7 @@
                     </FrameLayout>
 
                     <TextView
+                        android:id="@+id/unyellowingText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -240,11 +245,12 @@
                 android:text="About Us"
                 android:textColor="#FAFF00"
                 android:textStyle="bold"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <View
                 android:layout_width="150dp"
                 android:layout_height="2dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="12dp"
                 android:background="#FFFFFF"
                 android:layout_gravity="center_horizontal"/>
@@ -256,6 +262,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:lineSpacingExtra="4dp"
+                android:justificationMode="inter_word"
                 android:layout_marginBottom="24dp" />
 
             <TextView
@@ -265,12 +272,13 @@
                 android:text="Location"
                 android:textColor="#FAFF00"
                 android:textStyle="bold"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <View
                 android:layout_width="150dp"
                 android:layout_height="2dp"
                 android:layout_marginBottom="12dp"
+                android:layout_marginTop="5dp"
                 android:background="#FFFFFF"
                 android:layout_gravity="center_horizontal"/>
 

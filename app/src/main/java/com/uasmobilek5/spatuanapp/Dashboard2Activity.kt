@@ -6,18 +6,18 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 
-class MainActivity : AppCompatActivity() {
+class Dashboard2Activity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_dashboard2)
 
         val tvSpatuan = findViewById<TextView>(R.id.tvSpatuan)
-        val splashScreenLayout = findViewById<ConstraintLayout>(R.id.splashScreenLayout)
-
         val text = "SPATUAN"
         val spannable = SpannableString(text)
 
@@ -35,10 +35,17 @@ class MainActivity : AppCompatActivity() {
 
         tvSpatuan.text = spannable
 
-        splashScreenLayout.setOnClickListener {
-            startActivity(Intent(this, HomeActivity::class.java))
+        // tombol back
+        val backButton = findViewById<ImageView>(R.id.myIcon)
+        backButton.setOnClickListener {
             finish()
+        }
+
+        // tombol add
+        val addButton = findViewById<AppCompatButton>(R.id.button)
+        addButton.setOnClickListener {
+            val intent = Intent(this, CartActivity::class.java)
+            startActivity(intent)
         }
     }
 }
-

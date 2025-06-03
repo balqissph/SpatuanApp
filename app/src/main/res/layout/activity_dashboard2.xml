@@ -9,28 +9,29 @@
     android:background="#1D1D1D"
     tools:context=".Dashboard2Activity">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:contentDescription="Logo Sepatuan"
-        android:src="@drawable/spatuan"
+    <TextView
+        android:id="@+id/tvSpatuan"
+        android:layout_width="166dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="17dp"
+        android:letterSpacing="0.4"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="360dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="5dp"
+        android:id="@+id/TextDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
         android:text="Solusi Terbaik untuk Sepatu Bersih, Segar, dan Terawat !"
         android:textColor="#FFFFFF"
-        android:textSize="15sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/tvSpatuan" />
 
     <ImageView
         android:id="@+id/myIcon"
@@ -41,7 +42,7 @@
         android:contentDescription="Back Icon"
         android:src="@drawable/baseline_arrow_back_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/TextDescription" />
 
     <TextView
         android:id="@+id/textView2"
@@ -71,7 +72,7 @@
         android:layout_width="79dp"
         android:layout_height="30dp"
         android:layout_marginStart="120dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="45dp"
         android:background="@drawable/rounded_button"
         android:drawableStart="@drawable/baseline_add_24"
         android:drawablePadding="8dp"
@@ -83,11 +84,11 @@
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/textView2"
-        app:layout_constraintTop_toBottomOf="@id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/TextDescription" />
 
     <LinearLayout
         android:id="@+id/container_detail"
-        android:layout_width="380dp"
+        android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
         android:orientation="horizontal"
@@ -116,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:text="Rp 40.000"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp" />
 
@@ -136,6 +137,7 @@
                 android:text="Cocok untuk semua jenis sepatu putih."
                 android:textColor="@color/white"
                 android:textStyle="bold"
+                android:textSize="15sp"
                 android:layout_marginTop="4dp" />
         </LinearLayout>
     </LinearLayout>
@@ -150,14 +152,14 @@
         android:gravity="center"
         android:text="Description"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/container_detail" />
 
     <TextView
         android:id="@+id/textView7"
-        android:layout_width="366dp"
+        android:layout_width="350dp"
         android:layout_height="150dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"

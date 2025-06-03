@@ -22,40 +22,41 @@ class HomeActivity : AppCompatActivity() {
 
         spannable.setSpan(
             ForegroundColorSpan(Color.YELLOW),
-            0, 3, // SPA
+            0, 3,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
         spannable.setSpan(
             ForegroundColorSpan(Color.WHITE),
-            3, 7, // TUAN
+            3, 7,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
         tvSpatuan.text = spannable
 
-        val deepClean = findViewById<ImageView>(R.id.deepCleanImage)
-        val whiteShoes = findViewById<ImageView>(R.id.whiteShoesImage)
-        val fastClean = findViewById<ImageView>(R.id.fastCleanImage)
-        val unyellowing = findViewById<ImageView>(R.id.unyellowingImage)
+        // Mengambil TextView sesuai id yang ada di layout
+        val deepClean = findViewById<TextView>(R.id.deepCleanText)
+        val whiteShoes = findViewById<TextView>(R.id.whiteShoesText)
+        val fastClean = findViewById<TextView>(R.id.fastCleanText)
+        val unyellowing = findViewById<TextView>(R.id.unyellowingText)
 
-//        deepClean.setOnClickListener {
-//            startActivity(Intent(this, DeepCleanActivity::class.java))
-//        }
-//
-//        whiteShoes.setOnClickListener {
-//            startActivity(Intent(this, WhiteShoesActivity::class.java))
-//        }
-//
-//        fastClean.setOnClickListener {
-//            startActivity(Intent(this, FastCleanActivity::class.java))
-//        }
-//
-//        unyellowing.setOnClickListener {
-//            startActivity(Intent(this, UnyellowingActivity::class.java))
-//        }
+        deepClean.setOnClickListener {
+            startActivity(Intent(this, Dashboard1Activity::class.java))
+        }
 
-        // Bottom Nav
+        whiteShoes.setOnClickListener {
+            startActivity(Intent(this, Dashboard2Activity::class.java))
+        }
+
+        fastClean.setOnClickListener {
+            startActivity(Intent(this, Dashboard3Activity::class.java))
+        }
+
+        unyellowing.setOnClickListener {
+            startActivity(Intent(this, Dashboard4Activity::class.java))
+        }
+
+        // Bottom Navigation Buttons
         val homeBtn = findViewById<ImageView>(R.id.home)
         val cartBtn = findViewById<ImageView>(R.id.keranjang)
         val historyBtn = findViewById<ImageView>(R.id.histori)
@@ -68,8 +69,8 @@ class HomeActivity : AppCompatActivity() {
             startActivity(Intent(this, CartActivity::class.java))
         }
 
-//        historyBtn.setOnClickListener {
-//            startActivity(Intent(this, HistoryActivity::class.java))
-//        }
+        historyBtn.setOnClickListener {
+            startActivity(Intent(this, HistoryActivity::class.java))
+        }
     }
 }

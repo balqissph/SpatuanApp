@@ -26,9 +26,18 @@
         <activity
             android:name=".OrderActivity"
             android:exported="true"/>
-<!--        <activity-->
-<!--            android:name=".DashboardActivity"-->
-<!--            android:exported="true"/>-->
+        <activity
+            android:name=".Dashboard1Activity"
+            android:exported="true"/>
+        <activity
+            android:name=".Dashboard2Activity"
+            android:exported="true"/>
+        <activity
+            android:name=".Dashboard3Activity"
+            android:exported="true"/>
+        <activity
+            android:name=".Dashboard4Activity"
+            android:exported="true"/>
         <activity
             android:name=".CartActivity"
             android:exported="true"/>

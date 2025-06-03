@@ -22,15 +22,15 @@
         android:text="Histori"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/tvSpatuan"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="15dp"/>
 
     <View
         android:id="@+id/view"
-        android:layout_width="100dp"
+        android:layout_width="105dp"
         android:layout_height="2dp"
         android:layout_marginTop="8dp"
         android:background="#FFFFFF"
