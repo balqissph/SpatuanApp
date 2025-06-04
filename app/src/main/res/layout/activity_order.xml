@@ -37,6 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
                 android:text="Order Detail"
                 android:textColor="#FAFF00"
                 android:textSize="20sp"
@@ -122,7 +123,7 @@
                     android:id="@+id/checkbox_dana"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:buttonTint="#FAFF00" />
+                    android:buttonTint="#000000" />
             </LinearLayout>
 
             <LinearLayout
@@ -151,7 +152,7 @@
                     android:id="@+id/checkbox_shopee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:buttonTint="#FAFF00" />
+                    android:buttonTint="#000000" />
             </LinearLayout>
 
             <LinearLayout
@@ -180,18 +181,18 @@
                     android:id="@+id/checkbox_cod"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:buttonTint="#FAFF00" />
+                    android:buttonTint="#000000" />
             </LinearLayout>
 
             <Button
                 android:id="@+id/btnSubmit"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:backgroundTint="#FAFF00"
                 android:text="Pesan Sekarang"
                 android:textColor="#000"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_gravity="end"/>
         </LinearLayout>
     </ScrollView>
 
