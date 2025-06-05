@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.uasmobilek5.spatuanapp.R
 import com.uasmobilek5.spatuanapp.model.CartItem
 
-class CartAdapter(private val items: List<CartItem>) :
+class CartAdapter(private val items: MutableList<CartItem>) :
     RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     class CartViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -34,9 +34,17 @@ class CartAdapter(private val items: List<CartItem>) :
         holder.itemPrice.text = "Price: Rp. ${item.price * item.quantity}"
 
         holder.deleteIcon.setOnClickListener {
-            // Belum implement hapus, nanti bisa pakai ListMutable + notifyDataSetChanged
+            if (item.quantity > 1) {
+                item.quantity--
+                notifyItemChanged(position)
+            } else {
+                items.removeAt(position)
+                com.uasmobilek5.spatuanapp.CartStorage.cartItems.remove(item)
+                notifyItemRemoved(position)
+                notifyItemRangeChanged(position, items.size)
+            }
         }
     }
 
-    override fun getItemCount() = items.size
+    override fun getItemCount(): Int = items.size
 }
