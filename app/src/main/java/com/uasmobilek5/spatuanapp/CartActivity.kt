@@ -51,13 +51,9 @@ class CartActivity : AppCompatActivity() {
         keranjangIcon = findViewById(R.id.keranjang)
         historiIcon = findViewById(R.id.histori)
 
-        val cartItems = listOf(
-            CartItem(R.drawable.fast_clean, "Fast Clean", 1, 35000),
-            CartItem(R.drawable.deep_clean, "Deep Clean", 2, 40000),
-            CartItem(R.drawable.unyellowing, "Unyellowing", 1, 35000),
-        )
+        val cartItems = CartStorage.cartItems
 
-        val cartAdapter = CartAdapter(cartItems)
+        val cartAdapter = CartAdapter(CartStorage.cartItems)
         cartRecyclerView.layoutManager = LinearLayoutManager(this)
         cartRecyclerView.adapter = cartAdapter
 
