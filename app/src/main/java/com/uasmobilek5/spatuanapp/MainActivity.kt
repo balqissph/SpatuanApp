@@ -3,6 +3,8 @@ package com.uasmobilek5.spatuanapp
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
@@ -16,29 +18,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val tvSpatuan = findViewById<TextView>(R.id.tvSpatuan)
-        val splashScreenLayout = findViewById<ConstraintLayout>(R.id.splashScreenLayout)
 
         val text = "SPATUAN"
         val spannable = SpannableString(text)
-
         spannable.setSpan(
             ForegroundColorSpan(Color.YELLOW),
             0, 3,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-
         spannable.setSpan(
             ForegroundColorSpan(Color.WHITE),
             3, 7,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-
         tvSpatuan.text = spannable
 
-        splashScreenLayout.setOnClickListener {
-            startActivity(Intent(this, HomeActivity::class.java))
+        Handler(Looper.getMainLooper()).postDelayed({
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
-        }
+        }, 3000)
     }
 }
 
