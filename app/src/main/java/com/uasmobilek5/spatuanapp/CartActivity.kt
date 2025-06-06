@@ -12,8 +12,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.uasmobilek5.spatuanapp.adapter.CartAdapter
-import com.uasmobilek5.spatuanapp.model.CartItem
+import com.uasmobilek5.spatuanapp.CartAdapter
+import com.uasmobilek5.spatuanapp.CartItem
+import com.uasmobilek5.spatuanapp.CartStorage
 
 class CartActivity : AppCompatActivity() {
 

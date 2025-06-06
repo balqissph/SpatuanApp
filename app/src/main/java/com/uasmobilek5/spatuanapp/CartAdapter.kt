@@ -1,4 +1,4 @@
-package com.uasmobilek5.spatuanapp.adapter
+package com.uasmobilek5.spatuanapp
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.uasmobilek5.spatuanapp.R
-import com.uasmobilek5.spatuanapp.model.CartItem
+import com.uasmobilek5.spatuanapp.CartItem
 
 class CartAdapter(private val items: MutableList<CartItem>) :
     RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
@@ -30,12 +30,12 @@ class CartAdapter(private val items: MutableList<CartItem>) :
         val item = items[position]
         holder.itemImage.setImageResource(item.imageResId)
         holder.itemName.text = item.name
-        holder.itemQty.text = "Qty: ${item.quantity}"
-        holder.itemPrice.text = "Price: Rp. ${item.price * item.quantity}"
+        holder.itemQty.text = "Qty: ${item.qty}"
+        holder.itemPrice.text = "Price: Rp. ${item.price * item.qty}"
 
         holder.deleteIcon.setOnClickListener {
-            if (item.quantity > 1) {
-                item.quantity--
+            if (item.qty > 1) {
+                item.qty--
                 notifyItemChanged(position)
             } else {
                 items.removeAt(position)
@@ -45,6 +45,7 @@ class CartAdapter(private val items: MutableList<CartItem>) :
             }
         }
     }
+
 
     override fun getItemCount(): Int = items.size
 }

@@ -1,9 +1,9 @@
-package com.uasmobilek5.spatuanapp.model
+package com.uasmobilek5.spatuanapp
 
 data class CartItem(
     val imageResId: Int,
     val name: String,
-    var quantity: Int,
+    var qty: Int,
     val price: Int
-)
 
+)

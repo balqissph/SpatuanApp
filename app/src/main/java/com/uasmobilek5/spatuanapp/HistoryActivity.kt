@@ -11,6 +11,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.getValue
 
 class HistoryActivity : AppCompatActivity() {
 
@@ -18,6 +20,9 @@ class HistoryActivity : AppCompatActivity() {
     private lateinit var homeIcon: ImageView
     private lateinit var keranjangIcon: ImageView
     private lateinit var historiIcon: ImageView
+    private lateinit var historyAdapter: HistoryAdapter
+    private lateinit var databaseRef: DatabaseReference
+    private val historyList = mutableListOf<HistoryItem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,16 +40,28 @@ class HistoryActivity : AppCompatActivity() {
         keranjangIcon = findViewById(R.id.keranjang)
         historiIcon = findViewById(R.id.histori)
 
-        // Dummy data
-        val historyList = listOf(
-            HistoryItem(R.drawable.fast_clean, "Fast Clean", 3, 90000),
-            HistoryItem(R.drawable.deep_clean, "Deep Clean", 2, 80000),
-            HistoryItem(R.drawable.unyellowing, "Unyellowing", 1, 35000)
-        )
-
-        val adapter = HistoryAdapter(historyList)
+        historyAdapter = HistoryAdapter(historyList)
         historyRecyclerView.layoutManager = LinearLayoutManager(this)
-        historyRecyclerView.adapter = adapter
+        historyRecyclerView.adapter = historyAdapter
+
+        // 🔥 Ambil data dari Firebase Realtime Database
+        databaseRef = FirebaseDatabase.getInstance().getReference("history")
+        databaseRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                historyList.clear()
+                for (data in snapshot.children) {
+                    val item = data.getValue(HistoryItem::class.java)
+                    if (item != null) {
+                        historyList.add(item)
+                    }
+                }
+                historyAdapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Tangani error
+            }
+        })
 
         homeIcon.setOnClickListener {
             startActivity(Intent(this, HomeActivity::class.java))
@@ -57,6 +74,7 @@ class HistoryActivity : AppCompatActivity() {
         }
 
         historiIcon.setOnClickListener {
+            // Sudah berada di halaman histori
         }
     }
 }

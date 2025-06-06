@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "623922659437",
+    "firebase_url": "https://spatuanapps-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "spatuanapps",
+    "storage_bucket": "spatuanapps.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:623922659437:android:0ce8fb564fb79853ed3f64",
+        "android_client_info": {
+          "package_name": "com.uasmobilek5.spatuanapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANh5Gr4IG2prBjVMiSEwMNBvIuTwVvnYs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

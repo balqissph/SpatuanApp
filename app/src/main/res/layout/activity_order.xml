@@ -82,11 +82,12 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvTotalPesanan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="• Fast Clean ( Qty : 3 )        : Rp 90.000\n• Fast Clean ( Qty : 3 )        : Rp 90.000\nJumlah                             : Rp 180.000"
                 android:textColor="#FFFFFF"
                 android:layout_marginBottom="16dp" />
+
 
             <TextView
                 android:layout_width="wrap_content"

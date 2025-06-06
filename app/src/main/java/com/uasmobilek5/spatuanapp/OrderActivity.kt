@@ -8,8 +8,14 @@ import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.uasmobilek5.spatuanapp.CartStorage
+import com.google.firebase.database.FirebaseDatabase
+import com.uasmobilek5.spatuanapp.Order
+import com.uasmobilek5.spatuanapp.OrderItem
 
 class OrderActivity : AppCompatActivity() {
+
+    private lateinit var tvTotalPesanan: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +43,9 @@ class OrderActivity : AppCompatActivity() {
         val checkboxShopee = findViewById<CheckBox>(R.id.checkbox_shopee)
         val checkboxCOD = findViewById<CheckBox>(R.id.checkbox_cod)
         val btnSubmit = findViewById<Button>(R.id.btnSubmit)
+        tvTotalPesanan = findViewById(R.id.tvTotalPesanan)
 
-        // Tambahkan ini untuk navigasi bawah
+        // Navigasi bawah
         val homeIcon = findViewById<ImageView>(R.id.home)
         val keranjangIcon = findViewById<ImageView>(R.id.keranjang)
         val historiIcon = findViewById<ImageView>(R.id.histori)
@@ -82,8 +89,48 @@ class OrderActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val message = "Nama: $nama\nAlamat: $alamat\nMetode Pembayaran: $selectedPayment"
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+            val cartItems = CartStorage.cartItems
+            if (cartItems.isEmpty()) {
+                Toast.makeText(this, "Keranjang kosong", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // Buat list OrderItem dari CartStorage
+            val orderItems = cartItems.map { item ->
+                OrderItem(
+                    name = item.name,
+                    qty = item.qty,
+                    price = item.price
+                )
+            }
+
+            val totalHarga = cartItems.sumOf { it.qty * it.price }
+
+            // Buat objek Order
+            val order = Order(
+                nama = nama,
+                alamat = alamat,
+                metodePembayaran = selectedPayment,
+                items = orderItems,
+                totalHarga = totalHarga,
+                timestamp = System.currentTimeMillis()
+            )
+
+            // Simpan order ke Firebase Realtime Database
+            val database = FirebaseDatabase.getInstance()
+            val ordersRef = database.getReference("history")
+            val newOrderRef = ordersRef.push()  // buat key unik otomatis
+
+            newOrderRef.setValue(order)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Pesanan berhasil disimpan", Toast.LENGTH_LONG).show()
+                    // Bisa lanjut ke HistoryActivity atau halaman lain
+                    startActivity(Intent(this, HistoryActivity::class.java))
+                    finish()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(this, "Gagal menyimpan pesanan: ${e.message}", Toast.LENGTH_LONG).show()
+                }
         }
 
         // Navigasi bawah
@@ -101,5 +148,30 @@ class OrderActivity : AppCompatActivity() {
             startActivity(Intent(this, HistoryActivity::class.java))
             finish()
         }
+
+        // Tampilkan total pesanan dari cart
+        tampilkanTotalPesanan()
+    }
+
+    private fun tampilkanTotalPesanan() {
+        val cartItems = CartStorage.cartItems
+
+        if (cartItems.isEmpty()) {
+            tvTotalPesanan.text = "Keranjang kosong"
+            return
+        }
+
+        val detail = StringBuilder()
+        var totalHarga = 0
+
+        for (item in cartItems) {
+            val subtotal = item.qty * item.price
+            detail.append("• ${item.name} ( Qty : ${item.qty} ) : Rp $subtotal\n")
+            totalHarga += subtotal
+        }
+
+        detail.append("Jumlah : Rp $totalHarga")
+
+        tvTotalPesanan.text = detail.toString()
     }
 }

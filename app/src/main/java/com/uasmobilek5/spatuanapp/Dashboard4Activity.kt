@@ -10,7 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
-import com.uasmobilek5.spatuanapp.model.CartItem
+import com.uasmobilek5.spatuanapp.CartItem
+import com.uasmobilek5.spatuanapp.CartStorage
 
 class Dashboard4Activity : AppCompatActivity() {
 
@@ -50,7 +51,7 @@ class Dashboard4Activity : AppCompatActivity() {
             val existingItem = CartStorage.cartItems.find { it.name == newItem.name }
 
             if (existingItem != null) {
-                val updatedItem = existingItem.copy(quantity = existingItem.quantity + 1)
+                val updatedItem = existingItem.copy(qty = existingItem.qty + 1)
 
                 CartStorage.cartItems.remove(existingItem)
                 CartStorage.cartItems.add(updatedItem)
