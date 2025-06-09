@@ -9,6 +9,9 @@ import android.text.style.ForegroundColorSpan
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
+import android.widget.Toast
+
 
 class HomeActivity : AppCompatActivity() {
 
@@ -60,6 +63,20 @@ class HomeActivity : AppCompatActivity() {
         val homeBtn = findViewById<ImageView>(R.id.home)
         val cartBtn = findViewById<ImageView>(R.id.keranjang)
         val historyBtn = findViewById<ImageView>(R.id.histori)
+
+        val imageMap = findViewById<ImageView>(R.id.imageMap)
+        imageMap.setOnClickListener {
+            val gmmIntentUri = Uri.parse("https://maps.app.goo.gl/2Gi9ZG8myU8cfEzK9")
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+
+
+            if (mapIntent.resolveActivity(packageManager) != null) {
+                startActivity(mapIntent)
+            } else {
+                Toast.makeText(this, "Google Maps tidak tersedia", Toast.LENGTH_SHORT).show()
+            }
+        }
+
 
         homeBtn.setOnClickListener {
             startActivity(Intent(this, HomeActivity::class.java))

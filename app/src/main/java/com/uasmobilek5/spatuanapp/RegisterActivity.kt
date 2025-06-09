@@ -7,16 +7,21 @@ import android.text.InputType
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class RegisterActivity : AppCompatActivity() {
 
+    private lateinit var auth: FirebaseAuth
     private var isPasswordVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
+        auth = FirebaseAuth.getInstance()
 
         val etUsername = findViewById<EditText>(R.id.etUsername)
         val etEmail = findViewById<EditText>(R.id.etEmail)
@@ -25,7 +30,9 @@ class RegisterActivity : AppCompatActivity() {
         val btnRegister = findViewById<Button>(R.id.btnRegister)
         val tvToRegister = findViewById<TextView>(R.id.tvToRegister)
         val btnBack = findViewById<ImageView>(R.id.btnBack)
+        val tvSpatuan = findViewById<TextView>(R.id.tvSpatuan)
 
+        // Toggle password visibility
         ivTogglePassword.setOnClickListener {
             isPasswordVisible = !isPasswordVisible
             if (isPasswordVisible) {
@@ -38,36 +45,70 @@ class RegisterActivity : AppCompatActivity() {
             etPassword.setSelection(etPassword.text.length)
         }
 
-        val tvSpatuan = findViewById<TextView>(R.id.tvSpatuan)
-
+        // Custom SPATUAN logo text
         val text = "SPATUAN"
         val spannable = SpannableString(text)
-        spannable.setSpan(
-            ForegroundColorSpan(Color.YELLOW),
-            0, 3,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        spannable.setSpan(
-            ForegroundColorSpan(Color.WHITE),
-            3, 7,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
+        spannable.setSpan(ForegroundColorSpan(Color.YELLOW), 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannable.setSpan(ForegroundColorSpan(Color.WHITE), 3, 7, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         tvSpatuan.text = spannable
 
+        // REGISTER BUTTON
         btnRegister.setOnClickListener {
-            val username = etUsername.text.toString()
-            val email = etEmail.text.toString()
-            val password = etPassword.text.toString()
+            val username = etUsername.text.toString().trim()
+            val email = etEmail.text.toString().trim()
+            val password = etPassword.text.toString().trim()
 
+            // Validasi field kosong
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Semua field harus diisi", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Registrasi berhasil", Toast.LENGTH_SHORT).show()
-                 startActivity(Intent(this, LoginActivity::class.java))
-                 finish()
+                return@setOnClickListener
             }
+
+            // Validasi format email
+            val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+            if (!email.matches(emailPattern.toRegex())) {
+                Toast.makeText(this, "Email tidak valid", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // Firebase     Register
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val user = auth.currentUser
+
+                        // Kirim email verifikasi
+                        user?.sendEmailVerification()
+                            ?.addOnCompleteListener { verifyTask ->
+                                if (verifyTask.isSuccessful) {
+                                    Toast.makeText(
+                                        this,
+                                        "Registrasi berhasil! Silakan verifikasi email Anda sebelum login.",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                    auth.signOut() // Logout agar tidak auto-login
+                                    startActivity(Intent(this, LoginActivity::class.java))
+                                    finish()
+                                } else {
+                                    Toast.makeText(
+                                        this,
+                                        "Gagal mengirim email verifikasi: ${verifyTask.exception?.message}",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
+                            }
+                    } else {
+                        Toast.makeText(
+                            this,
+                            "Registrasi gagal: ${task.exception?.message}",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        Log.e("REGISTER", "Gagal daftar", task.exception)
+                    }
+                }
         }
 
+        // Back to login
         tvToRegister.setOnClickListener {
             finish()
         }

@@ -8,14 +8,14 @@ import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.uasmobilek5.spatuanapp.CartStorage
-import com.google.firebase.database.FirebaseDatabase
-import com.uasmobilek5.spatuanapp.Order
-import com.uasmobilek5.spatuanapp.OrderItem
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class OrderActivity : AppCompatActivity() {
 
     private lateinit var tvTotalPesanan: TextView
+    private val db = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,17 +24,8 @@ class OrderActivity : AppCompatActivity() {
         val tvSpatuan = findViewById<TextView>(R.id.tvSpatuan)
         val text = "SPATUAN"
         val spannable = SpannableString(text)
-
-        spannable.setSpan(
-            ForegroundColorSpan(Color.YELLOW),
-            0, 3,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        spannable.setSpan(
-            ForegroundColorSpan(Color.WHITE),
-            3, 7,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
+        spannable.setSpan(ForegroundColorSpan(Color.YELLOW), 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannable.setSpan(ForegroundColorSpan(Color.WHITE), 3, 7, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         tvSpatuan.text = spannable
 
         val etNama = findViewById<EditText>(R.id.etNama)
@@ -45,19 +36,15 @@ class OrderActivity : AppCompatActivity() {
         val btnSubmit = findViewById<Button>(R.id.btnSubmit)
         tvTotalPesanan = findViewById(R.id.tvTotalPesanan)
 
-        // Navigasi bawah
         val homeIcon = findViewById<ImageView>(R.id.home)
         val keranjangIcon = findViewById<ImageView>(R.id.keranjang)
         val historiIcon = findViewById<ImageView>(R.id.histori)
 
         val paymentCheckboxes = listOf(checkboxDana, checkboxShopee, checkboxCOD)
-
         paymentCheckboxes.forEach { checkbox ->
             checkbox.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
-                    paymentCheckboxes.filter { it != checkbox }.forEach {
-                        it.isChecked = false
-                    }
+                    paymentCheckboxes.filter { it != checkbox }.forEach { it.isChecked = false }
                 }
             }
         }
@@ -95,18 +82,12 @@ class OrderActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Buat list OrderItem dari CartStorage
-            val orderItems = cartItems.map { item ->
-                OrderItem(
-                    name = item.name,
-                    qty = item.qty,
-                    price = item.price
-                )
+            val orderItems = cartItems.map {
+                OrderItem(it.name, it.qty, it.price)
             }
 
             val totalHarga = cartItems.sumOf { it.qty * it.price }
 
-            // Buat objek Order
             val order = Order(
                 nama = nama,
                 alamat = alamat,
@@ -116,15 +97,18 @@ class OrderActivity : AppCompatActivity() {
                 timestamp = System.currentTimeMillis()
             )
 
-            // Simpan order ke Firebase Realtime Database
-            val database = FirebaseDatabase.getInstance()
-            val ordersRef = database.getReference("history")
-            val newOrderRef = ordersRef.push()  // buat key unik otomatis
+            val userId = auth.currentUser?.uid
+            if (userId == null) {
+                Toast.makeText(this, "User belum login", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
 
-            newOrderRef.setValue(order)
+            db.collection("users")
+                .document(userId)
+                .collection("histori")
+                .add(order)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Pesanan berhasil disimpan", Toast.LENGTH_LONG).show()
-                    // Bisa lanjut ke HistoryActivity atau halaman lain
                     startActivity(Intent(this, HistoryActivity::class.java))
                     finish()
                 }
@@ -149,7 +133,6 @@ class OrderActivity : AppCompatActivity() {
             finish()
         }
 
-        // Tampilkan total pesanan dari cart
         tampilkanTotalPesanan()
     }
 
@@ -171,7 +154,6 @@ class OrderActivity : AppCompatActivity() {
         }
 
         detail.append("Jumlah : Rp $totalHarga")
-
         tvTotalPesanan.text = detail.toString()
     }
 }

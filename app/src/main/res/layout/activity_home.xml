@@ -310,10 +310,13 @@
                     android:layout_marginBottom="8dp" />
 
                 <ImageView
+                    android:id="@+id/imageMap"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:src="@drawable/map_preview"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:clickable="true"
+                    android:focusable="true"/>
             </LinearLayout>
             <Space
                 android:layout_width="match_parent"

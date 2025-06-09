@@ -11,8 +11,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.*
-import com.google.firebase.database.ktx.getValue
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class HistoryActivity : AppCompatActivity() {
 
@@ -21,8 +21,9 @@ class HistoryActivity : AppCompatActivity() {
     private lateinit var keranjangIcon: ImageView
     private lateinit var historiIcon: ImageView
     private lateinit var historyAdapter: HistoryAdapter
-    private lateinit var databaseRef: DatabaseReference
     private val historyList = mutableListOf<HistoryItem>()
+    private val db = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,25 +45,32 @@ class HistoryActivity : AppCompatActivity() {
         historyRecyclerView.layoutManager = LinearLayoutManager(this)
         historyRecyclerView.adapter = historyAdapter
 
-        // 🔥 Ambil data dari Firebase Realtime Database
-        databaseRef = FirebaseDatabase.getInstance().getReference("history")
-        databaseRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
+        // ambel data dari Firestore
+        val userId = auth.currentUser?.uid
+        if (userId == null) {
+            // ini untuk user yang belum login
+            return
+        }
+
+        db.collection("users")
+            .document(userId)
+            .collection("histori")
+            .orderBy("timestamp")
+            .get()
+            .addOnSuccessListener { documents ->
                 historyList.clear()
-                for (data in snapshot.children) {
-                    val item = data.getValue(HistoryItem::class.java)
-                    if (item != null) {
-                        historyList.add(item)
-                    }
+                for (document in documents) {
+                    val item = document.toObject(HistoryItem::class.java)
+                    historyList.add(item)
                 }
                 historyAdapter.notifyDataSetChanged()
             }
+            .addOnFailureListener { e ->
 
-            override fun onCancelled(error: DatabaseError) {
-                // Tangani error
+                e.printStackTrace()
             }
-        })
 
+        // Navigasi bawah
         homeIcon.setOnClickListener {
             startActivity(Intent(this, HomeActivity::class.java))
             finish()
@@ -74,7 +82,7 @@ class HistoryActivity : AppCompatActivity() {
         }
 
         historiIcon.setOnClickListener {
-            // Sudah berada di halaman histori
+            // Sudah di halaman histori
         }
     }
 }
