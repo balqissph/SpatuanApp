@@ -11,6 +11,8 @@ import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -58,44 +60,61 @@ class RegisterActivity : AppCompatActivity() {
             val email = etEmail.text.toString().trim()
             val password = etPassword.text.toString().trim()
 
-            // Validasi field kosong
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Semua field harus diisi", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Validasi format email
             val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
             if (!email.matches(emailPattern.toRegex())) {
                 Toast.makeText(this, "Email tidak valid", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Firebase     Register
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val user = auth.currentUser
+                        val uid = user?.uid
 
-                        // Kirim email verifikasi
-                        user?.sendEmailVerification()
-                            ?.addOnCompleteListener { verifyTask ->
-                                if (verifyTask.isSuccessful) {
-                                    Toast.makeText(
-                                        this,
-                                        "Registrasi berhasil! Silakan verifikasi email Anda sebelum login.",
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                    auth.signOut() // Logout agar tidak auto-login
-                                    startActivity(Intent(this, LoginActivity::class.java))
-                                    finish()
-                                } else {
-                                    Toast.makeText(
-                                        this,
-                                        "Gagal mengirim email verifikasi: ${verifyTask.exception?.message}",
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                }
+                        // Simpan username ke Firestore
+                        val userMap = hashMapOf(
+                            "username" to username,
+                            "email" to email,
+                            "created_at" to FieldValue.serverTimestamp()
+                        )
+
+                        FirebaseFirestore.getInstance()
+                            .collection("users")
+                            .document(uid!!)
+                            .set(userMap)
+                            .addOnSuccessListener {
+                                user.sendEmailVerification()
+                                    .addOnCompleteListener { verifyTask ->
+                                        if (verifyTask.isSuccessful) {
+                                            Toast.makeText(
+                                                this,
+                                                "Registrasi berhasil! Silakan verifikasi email Anda sebelum login.",
+                                                Toast.LENGTH_LONG
+                                            ).show()
+                                            auth.signOut()
+                                            startActivity(Intent(this, LoginActivity::class.java))
+                                            finish()
+                                        } else {
+                                            Toast.makeText(
+                                                this,
+                                                "Gagal mengirim email verifikasi: ${verifyTask.exception?.message}",
+                                                Toast.LENGTH_LONG
+                                            ).show()
+                                        }
+                                    }
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(
+                                    this,
+                                    "Gagal menyimpan data pengguna: ${e.message}",
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
                     } else {
                         Toast.makeText(
@@ -108,7 +127,6 @@ class RegisterActivity : AppCompatActivity() {
                 }
         }
 
-        // Back to login
         tvToRegister.setOnClickListener {
             finish()
         }
